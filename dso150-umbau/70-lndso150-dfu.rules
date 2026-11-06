@@ -1,0 +1,13 @@
+# lnDSO150 (DSO150/DSO Shell mit lnDSO150-Firmware), DFU-Runtime und DFU-Modus.
+# Ohne diese Regel braucht dfu-util root: die DFU-Schnittstelle hat keinen
+# Kernel-Treiber, dfu-util greift per libusb direkt auf das Geraet zu.
+#
+# Installieren:
+#   sudo cp 70-lndso150-dfu.rules /etc/udev/rules.d/
+#   sudo udevadm control --reload-rules
+#   sudo udevadm trigger
+# Danach das Geraet ab- und wieder anstecken.
+#
+# uaccess gibt dem gerade angemeldeten Benutzer Zugriff (ueber systemd-logind).
+# GROUP/MODE ist der Rueckfall, falls uaccess nicht greift.
+SUBSYSTEM=="usb", ATTR{idVendor}=="1d50", ATTR{idProduct}=="6021", TAG+="uaccess", GROUP="uucp", MODE="0660"

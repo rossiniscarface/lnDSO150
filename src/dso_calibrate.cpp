@@ -135,7 +135,7 @@ bool saveCalibrationData()
     {
         return false;
     }
-    uint16_t *dc = DSOInputGain::getCalibrationTable(1);
+    uint16_t *dc = DSOInputGain::getCalibrationTable(0);
     for (int i = 0; i < DSO_NB_GAIN_RANGES; i++)
         data[i + 1] = dc[i];
 
